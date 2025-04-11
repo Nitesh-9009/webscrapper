@@ -1,6 +1,7 @@
 import Calendar from 'react-calendar'
 import React, { useState } from 'react';
 import StyleSheet from './calendar.module.css'
+import { useEffect } from 'react';
 
 
 
@@ -46,7 +47,23 @@ function Cal(){
           {filteredHacks.length > 0 ? (
             <div>
               <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>Hackathons on {selectedDate.toDateString()}:</h2>
-              
+              {filteredHacks.map((h, index) => (
+                <div key={index} style={{ margin: "10px 0", padding: "10px", background: "#fff", borderRadius: "5px" }}>
+                  <h3 style={{ fontSize: "18px", fontWeight: "bold" }}>{h.title}</h3>
+                  <img src={`https:${h.image}`} alt="Hackathon banner" className="w-full h-48 object-cover rounded-lg" />
+                  <p style={{ fontSize: "16px" }}>Name : {h.title}</p>
+                  <p style={{ fontSize: "16px" }}>Prize : {h.prize}</p>
+                  <p style={{ fontSize: "16px" }}>Date : {h.date}</p>
+                  <a
+                    href={h.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block mt-2 text-blue-600 hover:underline"
+                  >
+                    Visit
+                  </a>
+                </div>
+              ))}
             </div>
           ) : (
             <p>No hackathons on this date.</p>
